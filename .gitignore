@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# Node/[p]npm
+node_modules/
+*.json
