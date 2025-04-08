@@ -1,0 +1,77 @@
+# https://docs.npmjs.com/cli/configuring-npm/package-json
+$schema: https://json.schemastore.org/package
+version: 0.0.0
+name: "@danielbayley/bump"
+description: Simple command to bump your [p]npm package.json/yaml version.
+keywords:
+- bump
+- increment
+- semantic
+- semver
+- version
+- major
+- minor
+- patch
+- release
+- package
+- module
+- ci
+
+homepage: https://github.com/danielbayley/bump#readme
+repository: danielbayley/bump
+bugs: https://github.com/danielbayley/bump/issues
+
+author:
+  name: Daniel Bayley
+  email: daniel.bayley@me.com
+  url: https://danielbayley.dev
+
+funding: https://github.com/danielbayley/bump?sponsor=1
+license: MIT
+
+type: module
+imports:
+  "#utils": ./lib/utils.js
+exports: &index ./index.js
+files: [*index]
+bin: *index
+publishConfig:
+  access: public
+
+engines:
+  node: ">=20"
+  pnpm: ">=10"
+packageManager: pnpm@10.8.0
+
+optionalDependencies: &deps
+  semver: ^7.7.1
+  yaml: ^2.7.0
+
+devDependencies:
+  "@danielbayley/bump": workspace:^
+  fs-fixture: ^2.7.1
+  publint: ^0.3.11
+  <<: *deps
+
+scripts:
+  prepare: yaml --yaml 1.1 --single --json --indent ${TABSIZE:-2} < package.yaml > package.json
+
+  test: node --test --experimental-test-coverage test/*.js
+
+  prerelease: git stash --include-untracked --keep-index && pnpm prepare
+  release: pnpm version --force --no-git-tag-version
+  postrelease: pnpm publish
+
+  prepublishOnly: publint
+  postpublish: git stash pop --index --quiet
+
+  version: bump
+  postversion: >-
+    git commit --message  $npm_new_version package.yaml &&
+    git tag    --annotate $npm_new_version --message v$npm_new_version &&
+    git push   --follow-tags
+
+  watch: pnpm test --watch
+  clean: git clean -X --force
+  zap: pnpm clean && rm -rf node_modules || true
+  reinstall: pnpm zap && pnpm install
