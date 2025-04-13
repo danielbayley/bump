@@ -25,7 +25,7 @@ const options = {
 }
 
 // https://github.com/pnpm/pnpm/pull/1799
-const files = ["package.json", "package.yaml"]
+const files = ["package.yaml", "package.json"]
 const match = path => files.some(file => path.endsWith(file))
 const args  = process.argv.slice(2)
 
@@ -44,7 +44,9 @@ switch (args.length) {
   case 3: npm_old_version = version
 }
 
-path ??= await fs.readdir(".").then(ls => ls.find(match))
+const by = (a, b) => files.indexOf(a) - files.indexOf(b)
+
+path ??= await fs.readdir(".").then(ls => ls.sort(by).find(match))
 
 const stdinput = await stdin()
 const raw = stdinput || await readFile(path)
