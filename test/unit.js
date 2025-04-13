@@ -37,6 +37,7 @@ describe("`bump`", () => {
   })
 
   it("`bump`s `version` in the local `package.json` file, given a single `version` argument", async () => {
+    await fixtures.rm("package.yaml")
     const path    = fixtures.getPath("package.json")
     const before  = await readFile(path).then(JSON.parse)
     await shell(`bump ${increment}`, { cwd })
@@ -45,8 +46,7 @@ describe("`bump`", () => {
     assert.equal(compare, increment)
   })
 
-  it("or `package.yaml` file", async () => {
-    await fixtures.rm("package.json")
+  it(" or `package.yaml`, which takes precedence", async () => {
     const path    = fixtures.getPath("package.yaml")
     const before  = await readFile(path).then(YAML.parse)
     await shell(`bump ${increment}`, { cwd })
