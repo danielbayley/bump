@@ -20,7 +20,7 @@ const resolve = arg => aliases[arg] ?? arg
 
 // https://eemeli.org/yaml#tostring-options
 const options = {
-  indent: parseInt(TABSIZE),
+  indent: parseInt(TABSIZE) || 2,
   indentSeq: false,
 }
 
