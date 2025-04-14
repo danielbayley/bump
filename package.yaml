@@ -31,9 +31,11 @@ license: MIT
 
 type: module
 imports:
-  "#utils": ./lib/utils.js
+  "#utils": &utils ./lib/utils.js
 exports: &index ./index.js
-files: [*index]
+files:
+- *index
+- *utils
 bin: *index
 publishConfig:
   access: public
