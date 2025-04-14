@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 import fs from "node:fs/promises"
 import { newline, invert, stdin, readFile, parse, stringify } from "#utils"
 
