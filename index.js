@@ -7,7 +7,7 @@ let {
   npm_package_version,
   npm_old_version = npm_config_init_version ?? npm_package_version,
   npm_new_version,
-  TABSIZE
+  TABSIZE,
 } = process.env
 
 const aliases = invert({
