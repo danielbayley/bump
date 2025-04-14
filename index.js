@@ -22,6 +22,7 @@ const resolve = arg => aliases[arg] ?? arg
 const options = {
   indent: parseInt(TABSIZE) || 2,
   indentSeq: false,
+  flowCollectionPadding: false,
 }
 
 // https://github.com/pnpm/pnpm/pull/1799
