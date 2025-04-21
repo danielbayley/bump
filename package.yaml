@@ -43,7 +43,7 @@ publishConfig:
 engines:
   node: ">=20"
   pnpm: ">=10"
-packageManager: pnpm@10.8.0
+packageManager: pnpm@10.9.0
 
 optionalDependencies: &deps
   semver: ^7.7.1
