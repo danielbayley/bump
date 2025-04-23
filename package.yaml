@@ -47,7 +47,7 @@ packageManager: pnpm@10.9.0
 
 optionalDependencies: &deps
   semver: ^7.7.1
-  yaml: ^2.7.0
+  yaml: ^2.7.1
 
 devDependencies:
   "@danielbayley/bump": workspace:^
