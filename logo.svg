@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="400" viewBox="0 0 880 400">
+  <style type="text/css"><![CDATA[
+    :root {
+      color-scheme: light dark;
+      --light: #1f2328;
+      --dark:  #f0f6fc
+    }
+
+    /* FIXME: https://bugs.webkit.org/show_bug.cgi?id=199134 */
+    _::-webkit-full-page-media, _:future, :root * {
+      stroke: var(--dark);
+      mix-blend-mode: difference
+    }
+
+    use {
+      fill: none;
+      stroke: light-dark(var(--light), var(--dark));
+      stroke-width: 80;
+      stroke-linecap:  round;
+      stroke-linejoin: round;
+      --time: 500ms;
+      --delay: calc(var(--time) / 2);
+
+      &:not([href="#dot"]) {
+        animation-duration: var(--time);
+        animation-fill-mode: forwards
+      }
+
+      &[href="#zero"] {
+        animation-timing-function: ease-out
+      }
+      &[href="#one"] {
+        animation-name: slide, slide-100;
+        animation-timing-function: ease-in
+      }
+
+      &[href="#zero"]:nth-of-type(2n+1) { animation-name: slide }
+      &[href="#zero"]:not([y]) { animation-name: slide-100 }
+
+      &[href="#zero"]:first-of-type {
+        animation-delay: calc(var(--delay) * 8)
+      }
+      &[href="#one"]:nth-of-type(2) {
+        animation-delay:
+          calc(var(--delay) * 8),
+          calc(var(--delay) * 12)
+      }
+      &[href="#zero"]:nth-of-type(3) {
+        animation-delay: calc(var(--delay) * 13)
+      }
+
+      &[href="#zero"]:nth-of-type(5) {
+        animation-delay: calc(var(--delay) * 4)
+      }
+      &[href="#one"]:nth-of-type(6) {
+        animation-delay:
+          calc(var(--delay) * 4),
+          calc(var(--delay) * 8)
+      }
+      &[href="#zero"]:nth-of-type(7) {
+        animation-delay: calc(var(--delay) * 9)
+      }
+
+      &[href="#zero"]:nth-last-of-type(3) { animation-delay: var(--delay) }
+      &[href="#one"]:nth-last-of-type(2) {
+        animation-delay:
+          var(--delay),
+          calc(var(--delay) * 4)
+      }
+      &[href="#zero"]:last-of-type {
+        animation-delay: calc(var(--delay) * 5)
+      }
+    }
+    @keyframes slide { to { y: initial }}
+    @keyframes slide-100 { to { y: -100% }}
+  ]]></style>
+  <defs>
+    <path id="zero" d="M120 360c-44 0-80-36-80-80V120c0-44 36-80 80-80s80 36 80 80v160c0 44-36 80-80 80"/>
+    <path id="dot"  d="M280 360h0.1"/>
+    <path id="one"  d="M120 360V40l-80 80"/>
+  </defs>
+  <use href="#zero"/>
+  <use href="#one"  y="100%"/>
+  <use href="#zero" y="100%"/>
+  <use href="#dot"/>
+  <use href="#zero" x="320"/>
+  <use href="#one"  x="320" y="100%"/>
+  <use href="#zero" x="320" y="100%"/>
+  <use href="#dot"  x="320"/>
+  <use href="#zero" x="640"/>
+  <use href="#one"  x="640" y="100%"/>
+  <use href="#zero" x="640" y="100%"/>
+</svg>

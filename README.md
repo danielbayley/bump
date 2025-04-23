@@ -1,3 +1,5 @@
+<img title="SemVer" alt="0.0.0" src="logo.svg" align="right" width="160vw"/>
+
 `bump`
 =====
 Simple [CLI] command to `bump` your \[[`p`][`pnpm`]][`npm`][]
